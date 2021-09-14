@@ -26,16 +26,17 @@ function criarDomino(){
 class Mesa{
     constructor(){
         this.domino = criarDomino();
-        this.descarte = [];
+        this.descartes = [];
+    }
+
+    setDescartes(pedra){
+        this.descartes.push(pedra);
     }
 }
 
 class Jogador{
     constructor(nome, apelido, email, contato){
         this.nome = nome;
-        this.apelido = apelido;
-        this.email = email;
-        this.contato = contato;
     }
     getNome(){
         console.log(this.nome);
@@ -44,28 +45,45 @@ class Jogador{
 class JogadorDomino extends Jogador{
     mao = Array();
 
-    mexerPedras(mesa) {
+    mexerPedras(mesa){
         // Loop em todos os elementos
-    for (let i = mesa.domino.length - 1; i > 0; i--) {
-            // Escolhendo elemento aleatório
-        const j = Math.floor(Math.random() * (i + 1));
-        // Reposicionando elemento
-        [mesa.domino[i], mesa.domino[j]] = [mesa.domino[j], mesa.domino[i]];
+    for(var i = 0;i < 3;i++){
+        for(let i = mesa.domino.length - 1; i > 0; i--){
+                // Escolhendo elemento aleatório
+            const j = Math.floor(Math.random() * (i + 1));
+            // Reposicionando elemento
+            [mesa.domino[i], mesa.domino[j]] = [mesa.domino[j], mesa.domino[i]];
+        }
     }
     // Retornando array com aleatoriedade
     return mesa.domino;
     }
-
     pegarPedras(mesa){
         for(let i = 0;i < 7;i++){
             this.mao.push(mesa.domino.pop());
         }
     }
+    jogar(pedra, mesa){
+        mesa.setDescartes(pedra);
+    }
 }
 
 filipe = new JogadorDomino("Filipe");
-filipe.getNome();
+ryan = new JogadorDomino("Ryan");
+mauricio = new JogadorDomino("Mauricio");
+camilo = new JogadorDomino("Camilo");
 mesa = new Mesa();
 filipe.mexerPedras(mesa);
+ryan.pegarPedras(mesa);
+mauricio.pegarPedras(mesa);
+camilo.mexerPedras(mesa);
+camilo.pegarPedras(mesa);
 filipe.pegarPedras(mesa);
-console.debug(filipe);
+
+filipe.jogar(filipe.mao[0], mesa);
+ryan.jogar(ryan.mao[0], mesa);
+mauricio.jogar(mauricio.mao[0], mesa);
+camilo.jogar(camilo.mao[0], mesa);
+
+//console.debug(filipe);
+console.log(mesa.descartes);

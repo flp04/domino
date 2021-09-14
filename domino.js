@@ -43,11 +43,23 @@ class Jogador{
 }
 class JogadorDomino extends Jogador{
     mao = Array();
-    mexerPedras(Mesa){
-        mesa.domino = shuffleArray(mesa.domino);
-    }
-    pegarPedras(mesa){
 
+    mexerPedras(mesa) {
+        // Loop em todos os elementos
+    for (let i = mesa.domino.length - 1; i > 0; i--) {
+            // Escolhendo elemento aleatório
+        const j = Math.floor(Math.random() * (i + 1));
+        // Reposicionando elemento
+        [mesa.domino[i], mesa.domino[j]] = [mesa.domino[j], mesa.domino[i]];
+    }
+    // Retornando array com aleatoriedade
+    return mesa.domino;
+    }
+
+    pegarPedras(mesa){
+        for(let i = 0;i < 7;i++){
+            this.mao.push(mesa.domino.pop());
+        }
     }
 }
 
@@ -55,4 +67,5 @@ filipe = new JogadorDomino("Filipe");
 filipe.getNome();
 mesa = new Mesa();
 filipe.mexerPedras(mesa);
-console.debug(mesa.domino);
+filipe.pegarPedras(mesa);
+console.debug(filipe);

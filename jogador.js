@@ -9,5 +9,11 @@ class Jogador{
         console.log(this.nome);
     }
 }
+class JogadorDomino extends Jogador{
+    mao = Array();
+    pegarPedras(mesa){
+        
+    }
+}
 filipe = new Jogador("Filipe", "Batata", "filipe.husak87@gmail.com", "11 97613-5815");
 filipe.getNome();

@@ -1,3 +1,3 @@
-var x = 10;
-x--;
+var x = ['eco', 'sistema', 'lateral'];
+x.sort();
 console.log(x);

@@ -1,5 +1,3 @@
-import * as domino from 'domino.js';
-
 class Mesa{
     constructor(){
     }
